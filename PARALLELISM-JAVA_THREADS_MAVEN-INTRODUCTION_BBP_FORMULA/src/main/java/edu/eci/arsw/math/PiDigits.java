@@ -1,5 +1,9 @@
 package edu.eci.arsw.math;
 
+import java.util.ArrayList;
+
+import edu.eci.arsw.threads.CountThread;
+
 ///  <summary>
 ///  An implementation of the Bailey-Borwein-Plouffe formula for calculating hexadecimal
 ///  digits of pi.
@@ -19,7 +23,7 @@ public class PiDigits {
      * @param n number of threads between which the solution is to be parallelized
      * @return An array containing the hexadecimal digits.
      */
-    public static byte[] getDigits(int start, int count, int n) {
+    public static byte[] getDigits(int start, int count) {
         if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
@@ -47,6 +51,36 @@ public class PiDigits {
 
         return digits;
     }
+    
+    public static byte[] getDigits(int start, int count, int n) throws InterruptedException {
+    	byte[] digits = new byte[count];
+    	ArrayList<MyThread> hilos = new ArrayList<MyThread>();
+    	int lenght = count/n;
+    	
+    	for (int i = 1 ; i < n ; i++) {
+
+    		MyThread hilo = new MyThread(start, lenght);
+    		hilos.add(hilo);
+    		hilo.start();
+    		hilo.join();
+    		start += lenght;
+    	}
+    	
+    	MyThread hilo = new MyThread(start, count-start);
+    	hilos.add(hilo);
+    	hilo.start();
+    	hilo.join();
+    	
+    	ArrayList<byte[]> total = new ArrayList<byte[]>();
+    	for (MyThread hi : hilos) {
+    		System.out.println(hi.getResultado());
+    		total.add(hi.getResultado());
+    	}
+    	
+    	return null;
+    }
+    
+    
 
     /// <summary>
     /// Returns the sum of 16^(n - k)/(8 * k + m) from 0 to k.
@@ -109,6 +143,15 @@ public class PiDigits {
         }
 
         return result;
+    }
+    
+    public static void main(String a[]) throws InterruptedException{
+    	byte[] r = PiDigits.getDigits(0, 11, 5);
+    	/*
+    	System.out.println(r);
+    	for (byte i : r) {
+    		System.out.println(i);
+    	}*/
     }
 
 }
