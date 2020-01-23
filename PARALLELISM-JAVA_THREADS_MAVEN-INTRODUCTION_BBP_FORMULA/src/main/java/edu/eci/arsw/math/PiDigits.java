@@ -1,6 +1,6 @@
 package edu.eci.arsw.math;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 import edu.eci.arsw.threads.CountThread;
 
@@ -20,7 +20,6 @@ public class PiDigits {
      * Returns a range of hexadecimal digits of pi.
      * @param start The starting location of the range.
      * @param count The number of digits to return
-     * @param n number of threads between which the solution is to be parallelized
      * @return An array containing the hexadecimal digits.
      */
     public static byte[] getDigits(int start, int count) {
@@ -52,9 +51,17 @@ public class PiDigits {
         return digits;
     }
     
+    
+    /**
+     * Returns a range of hexadecimal digits of pi.
+     * @param start The starting location of the range.
+     * @param count The number of digits to return
+     * @param n number of threads between which the solution is to be parallelized
+     * @return An array containing the hexadecimal digits.
+     */
     public static byte[] getDigits(int start, int count, int n) throws InterruptedException {
     	byte[] digits = new byte[count];
-    	ArrayList<MyThread> hilos = new ArrayList<MyThread>();
+    	ArrayList<MyThread> hilos = new ArrayList<>();
     	int lenght = count/n;
     	
     	for (int i = 1 ; i < n ; i++) {
@@ -63,6 +70,15 @@ public class PiDigits {
     		hilos.add(hilo);
     		hilo.start();
     		hilo.join();
+    		System.out.println("hilo munero " + i + " con start " + start + " fin " + (lenght*i));
+    		
+    		for (int j = start ; j<(lenght*i) ; j++) {
+    			System.out.println(j);
+    			int h = 0;
+    			digits[j] = (byte) hilo.getResultado()[h];
+    			h++;
+    			//System.out.println(j);
+    		}
     		start += lenght;
     	}
     	
@@ -70,14 +86,8 @@ public class PiDigits {
     	hilos.add(hilo);
     	hilo.start();
     	hilo.join();
-    	
-    	ArrayList<byte[]> total = new ArrayList<byte[]>();
-    	for (MyThread hi : hilos) {
-    		System.out.println(hi.getResultado());
-    		total.add(hi.getResultado());
-    	}
-    	
-    	return null;
+   	
+    	return digits;
     }
     
     
