@@ -60,33 +60,46 @@ public class PiDigits {
      * @return An array containing the hexadecimal digits.
      */
     public static byte[] getDigits(int start, int count, int n) throws InterruptedException {
-    	byte[] digits = new byte[count];
-    	ArrayList<MyThread> hilos = new ArrayList<>();
-    	int lenght = count/n;
-    	
-    	for (int i = 1 ; i < n ; i++) {
+    	if (start < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
 
+        if (count < 0) {
+            throw new RuntimeException("Invalid Interval");
+        }
+        
+    	byte[] digits = new byte[count];
+    	if (n>count) {
+    		n=count;
+    	}
+    	int lenght = count/n;
+
+    	for (int i = 1 ; i < n ; i++) {
     		MyThread hilo = new MyThread(start, lenght);
-    		hilos.add(hilo);
     		hilo.start();
     		hilo.join();
     		System.out.println("hilo munero " + i + " con start " + start + " fin " + (lenght*i));
-    		
+    		int h = 0;
     		for (int j = start ; j<(lenght*i) ; j++) {
-    			System.out.println(j);
-    			int h = 0;
     			digits[j] = (byte) hilo.getResultado()[h];
+    			System.out.println(digits[j]);
     			h++;
-    			//System.out.println(j);
     		}
     		start += lenght;
     	}
     	
     	MyThread hilo = new MyThread(start, count-start);
-    	hilos.add(hilo);
     	hilo.start();
     	hilo.join();
-   	
+		System.out.println("hilo munero " + n + " con start " + start + " fin " + count);
+    	int h = 0;
+    	for (int j = start ; j<count ; j++) {
+			
+    		digits[j] = (byte) hilo.getResultado()[h];
+    		System.out.println(digits[j]);
+    		h++;
+    	}
+    	System.out.println(digits.length + "---");
     	return digits;
     }
     
@@ -156,12 +169,8 @@ public class PiDigits {
     }
     
     public static void main(String a[]) throws InterruptedException{
-    	byte[] r = PiDigits.getDigits(0, 11, 5);
-    	/*
-    	System.out.println(r);
-    	for (byte i : r) {
-    		System.out.println(i);
-    	}*/
+    	//byte[] r = PiDigits.getDigits(0, 11);
+    	byte[] e = PiDigits.getDigits(0, 50, 4);
     }
 
 }
