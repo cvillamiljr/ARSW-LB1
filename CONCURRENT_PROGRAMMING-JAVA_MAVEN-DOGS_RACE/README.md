@@ -11,4 +11,4 @@
 
 		¿Por que?
 		Por que en el momento que usamos start() se lleva a cabo del multiprocesmaiento y no se ejecutan los hilos secuencialmente, caso contrarario en
-		el momento que se usa el metodo run() se ejecutan los hilos secuencialmente y se evita el multiprocesamiento.
+		el momento que se usa el metodo run() se ejecutan los hilos secuencialmente y se evita el multiprocesam
