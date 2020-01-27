@@ -1,6 +1,7 @@
 package edu.eci.arsw.primefinder;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class KillThread extends Thread{
 	ArrayList<PrimeFinderThread> PrimeThreads;
@@ -25,6 +26,14 @@ public class KillThread extends Thread{
 				totalPrimos += h.getPrimes().size();
 			}
 			System.out.println(totalPrimos);
+			
+			Scanner s=new Scanner(System.in);
+			System.out.println("Presiona enter para seguir con el proceso");
+			s.nextLine();
+			for (PrimeFinderThread h: PrimeThreads) {
+				h.resume();
+				
+			}
 			
 		} catch(InterruptedException e) {
 			System.out.println(e);
