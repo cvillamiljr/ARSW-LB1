@@ -7,6 +7,7 @@ package arsw.threads;
  * 
  */
 public class Galgo extends Thread {
+	private boolean isAlive;
 	private int paso;
 	private Carril carril;
 	RegistroLlegada regl;
@@ -26,14 +27,18 @@ public class Galgo extends Thread {
 			
 			if (paso == carril.size()) {						
 				carril.finish();
-				int ubicacion=regl.getUltimaPosicionAlcanzada();
-				regl.setUltimaPosicionAlcanzada(ubicacion+1);
+				int ubicacion=regl.incrementoLlegada();
 				System.out.println("El galgo "+this.getName()+" llego en la posicion "+ubicacion);
 				if (ubicacion==1){
 					regl.setGanador(this.getName());
 				}
 				
 			}
+			synchronized (this) {
+                while (this.isAlive) {
+                    wait();
+                }
+            }
 		}
 	}
 
@@ -48,5 +53,16 @@ public class Galgo extends Thread {
 		}
 
 	}
+	public synchronized void continuar() {
+        this.isAlive = false;
+        notifyAll();
+    }
+	
+	public synchronized void detener() {
+        this.isAlive = true;
+        notifyAll();
+    }
+
+    
 
 }
