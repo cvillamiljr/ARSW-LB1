@@ -37,10 +37,10 @@ public class KillThread extends Thread{
 	public void run() {
 		try {
 			corra();
-		} catch (InterruptedException e) {
-
-		}
 		
+		} catch(InterruptedException e) {
+			System.out.println(e);
+		}
 	}
 
 }

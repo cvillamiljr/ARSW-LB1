@@ -68,6 +68,9 @@ public class PiDigits {
         if (count < 0) {
             throw new RuntimeException("Invalid Interval");
         }
+        if (n <= 0) {
+        	throw new RuntimeException("Invalid number of threads");
+        }
         
     	List<byte[]> digits = new ArrayList<byte[]>();
     	ArrayList<MyThread> MyThreads = new ArrayList<MyThread>(); 
@@ -76,6 +79,7 @@ public class PiDigits {
     		n=count;
     	}
     	int lenght = count/n;
+    	System.out.println(lenght);
     	int fin = lenght;
     	for (int i = 0 ; i < n ; i++) {
     		int inicio = start+(i*lenght);

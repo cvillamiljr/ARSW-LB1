@@ -89,4 +89,10 @@ public class PiCalcTest {
     	}
     }
 
+    /*
+    @Test
+    public void catidad de hilos() throws Exception {
+    	List<byte[]> Thread1 = PiDigits.getDigits(0, 50000, 500);
+    }*/
+    
 }
