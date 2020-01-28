@@ -22,6 +22,5 @@ public class MyThread extends Thread {
 	
 	public static void main(String[] args) {
 		MyThread obj = new MyThread(0,5); 
-		obj.start();
 	}
 }

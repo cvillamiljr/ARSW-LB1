@@ -1,6 +1,7 @@
 package edu.eci.arsw.math;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.eci.arsw.threads.CountThread;
 
@@ -59,7 +60,7 @@ public class PiDigits {
      * @param n number of threads between which the solution is to be parallelized
      * @return An array containing the hexadecimal digits.
      */
-    public static byte[] getDigits(int start, int count, int n) throws InterruptedException {
+    public static List<byte[]> getDigits(int start, int count, int n) throws InterruptedException {
     	if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
@@ -68,38 +69,27 @@ public class PiDigits {
             throw new RuntimeException("Invalid Interval");
         }
         
-    	byte[] digits = new byte[count];
+    	List<byte[]> digits = new ArrayList<byte[]>();
+    	ArrayList<MyThread> MyThreads = new ArrayList<MyThread>(); 
+    	
     	if (n>count) {
     		n=count;
     	}
     	int lenght = count/n;
-
-    	for (int i = 1 ; i < n ; i++) {
-    		MyThread hilo = new MyThread(start, lenght);
-    		hilo.start();
-    		hilo.join();
-    		System.out.println("hilo munero " + i + " con start " + start + " fin " + (lenght*i));
-    		int h = 0;
-    		for (int j = start ; j<(lenght*i) ; j++) {
-    			digits[j] = (byte) hilo.getResultado()[h];
-    			System.out.println(digits[j]);
-    			h++;
+    	int fin = lenght;
+    	for (int i = 0 ; i < n ; i++) {
+    		int inicio = start+(i*lenght);
+    		if (i==(n-1)) {
+    			fin += count%n;
     		}
-    		start += lenght;
+    		MyThread hilo = new MyThread(inicio, fin);
+    		hilo.start();
+    		MyThreads.add(hilo);
     	}
-    	
-    	MyThread hilo = new MyThread(start, count-start);
-    	hilo.start();
-    	hilo.join();
-		System.out.println("hilo munero " + n + " con start " + start + " fin " + count);
-    	int h = 0;
-    	for (int j = start ; j<count ; j++) {
-			
-    		digits[j] = (byte) hilo.getResultado()[h];
-    		System.out.println(digits[j]);
-    		h++;
+    	for (MyThread i : MyThreads) {
+    		i.join();
+    		digits.add(i.getResultado());
     	}
-    	System.out.println(digits.length + "---");
     	return digits;
     }
     
@@ -170,7 +160,7 @@ public class PiDigits {
     
     public static void main(String a[]) throws InterruptedException{
     	//byte[] r = PiDigits.getDigits(0, 11);
-    	byte[] e = PiDigits.getDigits(0, 50, 4);
+    	List<byte[]> e = PiDigits.getDigits(0, 50, 4);
     }
 
 }
