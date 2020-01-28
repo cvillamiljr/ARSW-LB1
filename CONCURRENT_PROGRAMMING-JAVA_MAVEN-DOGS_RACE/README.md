@@ -1,14 +1,19 @@
 # **Integrantes:**
-	- Diego puerto
-	- Cesar Villamil
+- Diego puerto
+- Cesar Villamil
 
 
-**Part I - Introduction to Java Threads**
+#### **Part I**
+1. Rendimineto con 1 hilo:
 
-2.
-	- 2.4 Cambio los datos de salida. Cuando usamos el metodo start() los numeros salian en desorden en ciertas partes de output pero cuando usamos el metodo
-		run() los datos salian en el orden que se crearon los hilos.
+    ![](CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/1.jpg)
+    
+2. Rendimiento con tres hilos:
 
-		¿Por que?
-		Por que en el momento que usamos start() se lleva a cabo del multiprocesmaiento y no se ejecutan los hilos secuencialmente, caso contrarario en
-		el momento que se usa el metodo run() se ejecutan los hilos secuencialmente y se evita el multiprocesam
+    ![](CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/2.jpg)
+    
+3. Cantidad de números primos encontrados en 5 segundos con 3 hilos:
+
+    ![](CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/3.jpg)
+    
+#### **Part II**

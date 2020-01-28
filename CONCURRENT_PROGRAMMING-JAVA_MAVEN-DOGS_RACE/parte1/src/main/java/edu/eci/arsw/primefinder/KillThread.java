@@ -25,7 +25,7 @@ public class KillThread extends Thread{
 				h.suspend();
 				totalPrimos += h.getPrimes().size();
 			}
-			System.out.println(totalPrimos);
+			System.out.println("Cantidad de primos encontrados: " + totalPrimos);
 			
 			Scanner s=new Scanner(System.in);
 			System.out.println("Presiona enter para seguir con el proceso");
