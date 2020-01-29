@@ -26,10 +26,13 @@
     
 3.  What you have been asked for is: you must modify the application so that when 5 seconds have elapsed since the execution started, all the threads are stopped and the number of primes ​​found so far is displayed. Then, you must wait for the user to press ENTER to resume their execution:
 
-    ![](/CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/3.jpg)
+	Código:
 
+	![](/CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/5Seg.jpg)
 
+	Funcionamiento:  
 
+	![](/CONCURRENT_PROGRAMMING-JAVA_MAVEN-DOGS_RACE/img/media/3.jpg)
 
 
 ### Part II

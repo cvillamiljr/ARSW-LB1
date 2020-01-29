@@ -18,6 +18,11 @@ Run():
 
 Porque en el momento que usamos start() se lleva a cabo el multiprocesmaiento y no se ejecutan los hilos secuencialmente, caso contrarario, en el momento que se usa el método run(), se ejecutan los hilos secuencialmente y se evita el multiprocesamiento
 #### **Part II - BBP Formula Exercise**
+
+1. Creación de la clase MyThread para calcular la porción requerida:
+
+![](/PARALLELISM-JAVA_THREADS_MAVEN-INTRODUCTION_BBP_FORMULA/img/Kill.jpg)
+
 3. JUnit test usando uno, dos y tres hilos:
 
 ![](/PARALLELISM-JAVA_THREADS_MAVEN-INTRODUCTION_BBP_FORMULA/img/TresHilos.jpg)
