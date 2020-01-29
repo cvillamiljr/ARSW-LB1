@@ -19,8 +19,6 @@
     
 #### **Part II**
 
-### Part I
-
 
 *   Para compilar:
 ```mvn package```
